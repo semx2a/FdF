@@ -6,7 +6,7 @@
 /*   By: seozcan <seozcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 11:27:53 by seozcan           #+#    #+#             */
-/*   Updated: 2022/05/04 11:27:55 by seozcan          ###   ########.fr       */
+/*   Updated: 2024/01/30 13:21:43 by seozcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@
 # include <X11/keysym.h>
 
 //		libft
-# include "../libft/inc/libft.h"
+# include "../Libft/inc/libft.h"
 
 //		ft_printf
 # include "../ft_printf/inc/ft_printf.h"
@@ -86,21 +86,20 @@
 # define LEFT_CLICK		1
 
 //		LINKED LISTS
-//		nodes structure
-typedef struct s_node
+typedef struct s_coordinate
 {	
-	int				x;
-	int				y;
-	int				z;
-	unsigned int	color;
-	struct s_node	*prev;
-	struct s_node	*next;
-}	t_node;
+	int						x;
+	int						y;
+	int						z;
+	unsigned int			color;
+	struct s_coordinate	*prev;
+	struct s_coordinate	*next;
+}	t_coordinate;
 
 typedef struct s_lst
 {
-	t_node	*head;
-	t_node	*tail;
+	t_coordinate	*head;
+	t_coordinate	*tail;
 }	t_lst;
 
 //		STRUCTURES
@@ -154,9 +153,9 @@ typedef struct s_img
 	float	z_div;
 	int		endian;	
 	t_lst	*matrix;
-	t_node	*tmp_a;
-	t_node	*tmp_b;
-	t_node	*hold;
+	t_coordinate	*tmp_a;
+	t_coordinate	*tmp_b;
+	t_coordinate	*hold;
 }	t_img;
 
 //		fdf_projections.c
@@ -180,8 +179,8 @@ void	cam_init(t_img *img);
 void	reset(t_img *img);
 
 //		fdf_bresenham.c
-void	drawline_y(t_map *map, t_img *img, t_node *ext1);
-void	drawline_x(t_map *map, t_img *img, t_node *ext1);
+void	drawline_y(t_map *map, t_img *img, t_coordinate *ext1);
+void	drawline_x(t_map *map, t_img *img, t_coordinate *ext1);
 void	put_pixel(t_img *img, int x, int y, int color);
 
 //		fdf_utils.c
@@ -191,7 +190,7 @@ void	free_and_exit(void *ptr);
 
 //		fdf_print.c
 void	print_lst(t_lst *matrix);
-void	print_node(t_node *node);
+void	print_coordinate(t_coordinate *coordinate);
 void	print_address(t_lst *stack);
 
 //		fdf_list.c
