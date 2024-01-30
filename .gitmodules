@@ -4,3 +4,6 @@
 [submodule "ft_printf"]
 	path = ft_printf
 	url = git@github.com:semx2a/ft_printf.git
+[submodule "minilibx-linux"]
+	path = minilibx-linux
+	url = git@github.com:42Paris/minilibx-linux.git
