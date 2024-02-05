@@ -5,6 +5,8 @@ ifndef SETTINGS_MK
 
 NAME	=	fdf
 
+UNAME	=	$(shell uname)
+
 # ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::SOURCE::
 
 SRC		=	$Sfdf_bresenham.c \
@@ -47,6 +49,6 @@ PTF		= 	$Plibftprintf.a
 
 IS_MLX	= 	true
 
-MLX		= 	$Mlibmlx_Linux.a
+MLX		= 	$Mlibmlx_$(UNAME).a
 
 endif

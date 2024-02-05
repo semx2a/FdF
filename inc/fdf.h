@@ -6,7 +6,7 @@
 /*   By: seozcan <seozcan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/04 11:27:53 by seozcan           #+#    #+#             */
-/*   Updated: 2024/01/30 13:21:43 by seozcan          ###   ########.fr       */
+/*   Updated: 2024/02/05 16:37:57 by seozcan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,17 @@
 # include <fcntl.h>
 
 //		X11
+#ifdef __linux__
 # include <X11/X.h>
 # include <X11/keysym.h>
+#endif
+
+#ifdef __APPLE__
+# include <X11/Xlib.h>
+# include <X11/Xutil.h>
+# include <X11/Xos.h>
+# include <X11/Xatom.h>
+#endif
 
 //		libft
 # include "../Libft/inc/libft.h"
@@ -54,8 +63,8 @@
 # define ERR_READ		"Cannot read file."
 
 //		WINDOW SIZE
-# define WIDTH			1600
-# define HEIGHT			1200
+# define WIDTH			1280
+# define HEIGHT			720
 
 //		PARAMETERS
 # define INT_MIN		-2147483648

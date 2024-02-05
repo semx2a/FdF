@@ -6,6 +6,13 @@ FdF is a 42 Project that aims to create an isometric 3D graphic representation o
 
 This project involves creating a graphical representation of a relief terrain in a schematic form. The program takes a file as input, containing coordinates representing points in space, and produces a wireframe rendering of the terrain. The rendering is displayed using an isometric projection based on the `Bresenham algorithm`.
 
+# 
+
+![t2-1](./.img/t2-1.png)
+![t2-2](./.img/t2-2.png)
+![mars-1](./.img/mars-1.png)
+![mars-2](./.img/mars-2.png)
+
 ## Project Structure
 
 The repository is organized with the following structure:
@@ -55,3 +62,25 @@ Maps are provided in the `assets/maps/` folder.
 - Effectively managing memory and avoiding memory leaks.
 - Developing a robust and well-structured C program.
 - Handling user interactions in a graphical environment.
+
+# Troubleshooting
+
+If the git submodules didn't clone properly, you can run the following commands to clone the submodules:
+
+```bash
+git submodule update --init --force --remote
+```
+
+For macOS users, the project needs a X11 server to run. You can install it with [`Homebrew`](https://brew.sh/) using the following command:
+
+```bash
+brew install xquartz libx11 libext
+reboot
+```
+
+If you have an issue with the window size, you can change the corresponding macros in the include file `fdf.h` located in the `inc/` folder: 
+
+```c
+# define WIDTH 1280
+# define HEIGHT 720
+```

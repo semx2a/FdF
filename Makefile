@@ -6,7 +6,7 @@
 #    By: seozcan <seozcan@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/07 19:14:12 by seozcan           #+#    #+#              #
-#    Updated: 2024/01/30 12:58:12 by seozcan          ###   ########.fr        #
+#    Updated: 2024/02/05 16:32:20 by seozcan          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,24 +26,36 @@ M 		=	minilibx-linux/
 
 CFLAGS	+=	-I$I
 
+LDFLAGS	=
+
 ifeq ($(IS_LIB), true)
 	CFLAGS	+=	-I$L$I
+	LDFLAGS	+=	-L$L -lft
 endif
 
 ifeq ($(IS_PTF), true)
 	CFLAGS	+=	-I$P$I
+	LDFLAGS	+=	-L$P -lftprintf
 endif
 
 ifeq ($(IS_MLX), true)
 	CFLAGS	+=	-I$M
+	LDFLAGS	+=	-L$M -lmlx
+	ifeq ($(shell uname -s), Darwin)
+		LDFLAGS += -framework OpenGL -framework AppKit -lX11 -lXext
+	else ifeq ($(shell uname -s), Linux)
+		LDFLAGS += -lXext -lX11 -lm
+	endif
 endif
 
-CLFAGS	+=	-Wconversion
-
-CFLAGS	+=	-g3 -fsanitize=address
-
-ifeq ($(IS_MLX), true)
-	MLXFLAGS	=	-lXext -lX11 -lm
+ifeq (debug, $(filter debug,$(MAKECMDGOALS)))
+	CFLAGS	+=	-g3
+endif
+ifeq (sanadd, $(filter sanadd,$(MAKECMDGOALS)))
+	CFLAGS	+=	-fsanitize=address
+endif
+ifeq (santhread, $(filter santhread,$(MAKECMDGOALS)))
+	CFLAGS	+=	-fsanitize=thread
 endif
 
 RM		=	/bin/rm -rf
@@ -83,7 +95,7 @@ $(DEP): $D%.d: $S%
 
 
 $(NAME): $(OBJ) $(DEP)
-	@$(CC) $(CFLAGS) $(OBJ) $(LIB) $(PTF) $(MLX) $(MLXFLAGS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LDFLAGS)
 	@echo "$(HIGREEN)compiling $(NAME):[OK]$(NO_COLOR)" | $(SPACE)
 
 lib:
