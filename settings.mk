@@ -5,6 +5,10 @@ ifndef SETTINGS_MK
 
 NAME	=	fdf
 
+ifeq ($(MAKECMDGOALS), bonus)
+NAME	=
+endif
+
 UNAME	=	$(shell uname)
 
 # ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::SOURCE::
@@ -22,10 +26,18 @@ SRC		=	$Sfdf_bresenham.c \
 			$Sget_next_line.c \
 			$Sget_next_line_utils.c
 
+ifeq ($(MAKECMDGOALS), bonus)
+SRC		=
+endif
+
 
 # :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::COMPILERS::
 
-CC		=	clang
+CC		=	gcc
+
+ifeq ($(UNAME), Darwin)
+CC	=	clang
+endif
 
 CFLAGS	=	-Wall -Wextra -Werror
 
